@@ -26,6 +26,7 @@ body.mynah-ui-root {
             display: none;
         }
     }
+
     > .mynah-ui-tab-contents-wrapper {
         position: relative;
         width: inherit;
@@ -52,9 +53,10 @@ body.mynah-ui-root {
         width: 2px;
         height: 2px;
         opacity: 0.25;
+
         &:horizontal {
-            width: 0px;
-            height: 0px;
+            width: 0;
+            height: 0;
         }
     }
 

@@ -1,17 +1,17 @@
+@import '../mixins';
 #mynah-feedback-form-wrapper {
-    display: flex;
-    flex-flow: column nowrap;
+    @include mynah-flex(column nowrap);
     position: absolute;
     bottom: 0;
     left: var(--mynah-sizing-2);
     right: var(--mynah-sizing-2);
     width: auto;
-    box-sizing: border-box;
     z-index: 9999999;
     opacity: 0;
     transform: translate3d(0, 5vh, 0);
     transition: var(--mynah-bottom-panel-transition);
     overflow: visible;
+
     &:before {
         transition: all 400ms cubic-bezier(0.25, 0, 0, 1);
         content: '';
@@ -25,28 +25,33 @@
         opacity: 0;
         pointer-events: none;
         transform: translate3d(0, 0, 0) scale(2);
-        transform-origin: center center;
         z-index: -1;
     }
+
     & + #mynah-wrapper {
         transition: var(--mynah-bottom-panel-transition);
     }
+
     &:not(.mynah-feedback-form-show) {
         &,
         & * {
             pointer-events: none !important;
         }
     }
+
     &.mynah-feedback-form-show {
         opacity: 1;
         transform: translate3d(0, 0, 0);
+
         &:before {
             opacity: 0.15;
         }
+
         & + #mynah-wrapper {
             transform: translate3d(0, 0px, 0) scale(0.95);
             transform-origin: top center;
             opacity: 0.25;
+
             &,
             & * {
                 pointer-events: none !important;
@@ -55,41 +60,40 @@
     }
 }
 
+// Feedback Form Styles
 .mynah-feedback-form {
     pointer-events: all;
-    box-sizing: border-box;
+    @include mynah-box-sizing;
     transition: var(--mynah-short-rev-transition);
     transform: translate3d(0, 0, 0);
-    display: flex;
-    flex-flow: column;
+    @include mynah-flex(column);
     gap: var(--mynah-sizing-4);
-    align-items: stretch;
     transform-origin: right bottom;
     z-index: 10;
     position: relative;
     border: var(--mynah-button-border-width) solid var(--mynah-color-border-default);
-    border-top-right-radius: var(--mynah-card-radius);
-    border-top-left-radius: var(--mynah-card-radius);
-    border-bottom: none;
+    border-radius: var(--mynah-card-radius) var(--mynah-card-radius) 0 0;
     box-shadow: 0px -25px 20px -25px rgba(0, 0, 0, 0.15);
     background-color: var(--mynah-color-bg);
     padding: var(--mynah-sizing-4);
     min-height: 20vh;
+
     > .mynah-card-body {
         flex: initial;
     }
+
+    // Feedback Form Header
     > .mynah-feedback-form-header {
-        display: flex;
-        box-sizing: border-box;
-        align-items: center;
+        @include mynah-flex(row nowrap, center);
         > h4 {
             flex: 1;
             margin: 0;
         }
     }
 
+    // Feedback Form Comment Section
     > .mynah-feedback-form-comment {
-        background-color: transparent;
+        @include mynah-box-sizing;
         padding: var(--mynah-sizing-3);
         border: var(--mynah-border-width) solid var(--mynah-color-border-default);
         resize: none;
@@ -101,17 +105,15 @@
         outline: none;
         color: var(--mynah-color-text-input);
         background-color: var(--mynah-card-bg);
-        box-sizing: border-box;
         font-family: inherit;
     }
 
+    // Feedback Form Select Section
     > .mynah-feedback-form-select-wrapper {
         position: relative;
-        display: flex;
-        box-sizing: border-box;
+        @include mynah-flex(row nowrap, center, flex-end);
         padding: var(--mynah-sizing-3);
-        justify-content: flex-end;
-        align-items: center;
+
         > .mynah-feedback-form-select {
             position: absolute;
             width: 100%;
@@ -127,17 +129,16 @@
             text-overflow: clip;
             outline: none;
         }
+
         > .mynah-feedback-form-select-handle {
             color: var(--mynah-color-text-weak);
             pointer-events: none;
         }
     }
 
+    // Feedback Form Buttons Container
     > .mynah-feedback-form-buttons-container {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        @include mynah-flex(row nowrap, center, flex-end);
         gap: var(--mynah-sizing-1);
-        box-sizing: border-box;
     }
 }

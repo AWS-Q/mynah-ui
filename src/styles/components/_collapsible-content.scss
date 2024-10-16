@@ -1,44 +1,36 @@
+@import '../mixins';
 .mynah-collapsible-content-wrapper {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    overflow: hidden;
-    position: relative;
+    @include mynah-collapsible-base;
+
     > .mynah-collapsible-content-checkbox {
         display: none;
+
+        // Label styling for collapsible content
         & + .mynah-collapsible-content-label {
-            box-sizing: border-box;
-            display: flex;
-            flex-flow: column nowrap;
-            overflow: hidden;
-            align-items: flex-start;
-            justify-content: stretch;
+            @include mynah-flex(row nowrap, flex-start, flex-start);
             padding: var(--mynah-sizing-2);
-            gap: var(--mynah-sizing-2);
+
+            // Title wrapper inside label
             > .mynah-collapsible-content-label-title-wrapper {
-                gap: var(--mynah-sizing-2);
-                display: flex;
-                flex-flow: row nowrap;
-                box-sizing: border-box;
-                width: 100%;
-                overflow: hidden;
-                justify-content: flex-start;
-                align-items: flex-start;
-                pointer-events: all;
+                @include mynah-flex(row nowrap, flex-start, flex-start);
                 cursor: pointer;
                 user-select: none;
+                pointer-events: all;
+
+                // Title text inside title wrapper
                 > .mynah-collapsible-content-label-title-text {
                     flex: 1;
                     overflow: hidden;
                 }
             }
+
+            // Content wrapper inside label
             > .mynah-collapsible-content-label-content-wrapper {
-                overflow: hidden;
-                box-sizing: border-box;
-                width: 100%;
+                @include mynah-collapsible-base;
             }
         }
 
+        // Hidden content when checked
         &:checked + .mynah-collapsible-content-label {
             > .mynah-collapsible-content-label-content-wrapper {
                 display: none;

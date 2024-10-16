@@ -1,3 +1,4 @@
+@import '../../mixins';
 @import '../../scss-variables';
 
 .mynah-card {
@@ -37,12 +38,15 @@
             }
         }
     }
+
     &.background {
         background-color: var(--mynah-card-bg);
     }
+
     &:not(.background) {
         box-shadow: none;
     }
+
     &.border {
         border: var(--mynah-border-width) solid var(--mynah-color-border-default);
     }

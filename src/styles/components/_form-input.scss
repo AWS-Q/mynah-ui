@@ -1,9 +1,9 @@
+@import '../mixins';
+// Form Input Wrapper
 .mynah-form-input-wrapper {
     position: relative;
-    display: flex;
-    box-sizing: border-box;
-    gap: var(--mynah-sizing-2);
-    flex-flow: column nowrap;
+    @include mynah-flex(column nowrap);
+
     &[disabled] {
         .mynah-form-input {
             opacity: 0.5 !important;
@@ -13,13 +13,12 @@
             pointer-events: none !important;
         }
     }
+
     > .mynah-form-input-label {
         > .mynah-ui-form-item-mandatory-title {
-            display: inline-flex;
-            flex-flow: row nowrap;
-            justify-content: flex-start;
-            align-items: center;
+            @include mynah-flex(row nowrap, center, flex-start);
             gap: var(--mynah-sizing-1);
+
             > .mynah-ui-icon {
                 color: var(--mynah-color-status-warning);
                 opacity: 0.75;
@@ -27,66 +26,62 @@
             }
         }
     }
+
     .mynah-form-input-container {
         position: relative;
-        display: flex;
-        box-sizing: border-box;
-        justify-content: flex-end;
-        align-items: center;
+        @include mynah-flex(row nowrap, center, flex-end);
+
         > .mynah-form-input {
             width: 100%;
-            left: 0;
             color: var(--mynah-color-text-default);
             border-radius: var(--mynah-input-radius);
-            &::placeholder {
-                color: var(--mynah-color-text-weak);
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
-            }
+            @include mynah-placeholder;
+
             option.empty-option {
                 font-style: italic;
                 opacity: 0.5;
             }
+
             &:not(.no-border) {
                 padding: var(--mynah-sizing-3);
                 border: var(--mynah-border-width) solid var(--mynah-color-border-default);
                 background-color: var(--mynah-card-bg);
             }
+
             -webkit-appearance: none;
             appearance: none;
             text-indent: 1px;
-            text-overflow: clip;
             outline: none;
+
             > .mynah-form-input-radio-wrapper {
-                display: inline-flex;
-                flex-flow: row nowrap;
-                justify-content: center;
-                align-items: center;
+                @include mynah-flex(row nowrap, center, center);
+
                 &:not(:last-child) {
                     margin-right: var(--mynah-sizing-4);
                 }
+
                 > .mynah-form-input-radio-label {
-                    display: inline-flex;
-                    flex-flow: row nowrap;
-                    justify-content: center;
-                    align-items: center;
+                    @include mynah-flex(row nowrap, center, center);
                     position: relative;
                     gap: var(--mynah-sizing-1);
                     cursor: pointer;
+
                     > input {
                         position: absolute;
                         opacity: 0;
                         cursor: pointer;
                         height: 0;
                         width: 0;
+
                         &:checked + .mynah-form-input-radio-check {
                             border-color: var(--mynah-color-button);
+
                             > .mynah-ui-icon {
                                 transform: scale(0.75);
                                 color: var(--mynah-card-bg);
                                 opacity: 1;
                             }
+
                             &::after {
                                 transform: scale(1);
                                 background-color: var(--mynah-color-button);
@@ -94,19 +89,16 @@
                             }
                         }
                     }
+
                     > .mynah-form-input-radio-check {
                         position: relative;
                         transition: var(--mynah-bottom-panel-transition);
                         width: var(--mynah-sizing-6);
                         height: var(--mynah-sizing-6);
                         border-radius: var(--mynah-sizing-3);
-                        overflow: hidden;
-                        box-sizing: border-box;
                         border: var(--mynah-border-width) solid var(--mynah-color-border-default);
-                        display: inline-flex;
-                        flex-flow: row nowrap;
-                        justify-content: center;
-                        align-items: center;
+                        @include mynah-flex(row nowrap, center, center);
+
                         > .mynah-ui-icon {
                             position: relative;
                             transition: inherit;
@@ -115,6 +107,7 @@
                             color: var(--mynah-color-button);
                             z-index: 10;
                         }
+
                         &::after {
                             $edgeSpace: calc(0 * var(--mynah-border-width));
                             content: '';
@@ -138,29 +131,32 @@
             > .mynah-feedback-form-stars-container {
                 transition: var(--mynah-short-rev-transition);
                 transform-origin: right bottom;
-                display: inline-flex;
-                flex-flow: row nowrap;
+                @include mynah-flex(row nowrap);
+
                 > .mynah-feedback-form-star {
                     cursor: pointer;
                     padding-right: var(--mynah-sizing-1);
                     color: var(--mynah-color-button);
                     font-size: 1.5rem;
                     transition: var(--mynah-very-short-transition);
+
                     > .mynah-ui-icon {
                         transition: var(--mynah-very-short-transition);
                         opacity: 0.4;
                         transform: translate3d(0, 0, 0) scale(0.6);
                     }
                 }
+
                 &[selected-star]:not(:hover) > :not(.mynah-feedback-form-star.selected ~ .mynah-feedback-form-star),
                 &:hover > :not(.mynah-feedback-form-star:hover ~ .mynah-feedback-form-star) {
                     > .mynah-ui-icon {
                         opacity: 1;
-                        transform: translate3d(0, 0, 0) scale(1);
+                        transform: scale(1);
                     }
                 }
             }
         }
+
         > textarea.mynah-form-input {
             font-family: var(--mynah-font-family);
             resize: none;
@@ -168,6 +164,7 @@
             color: var(--mynah-color-text-input);
             outline: none;
         }
+
         > .mynah-select-handle {
             position: absolute;
             color: var(--mynah-color-text-weak);
@@ -177,20 +174,17 @@
     }
 }
 
-.mynah-chat-item-form-items-container {
-    display: flex;
-    flex-flow: column nowrap;
-    gap: var(--mynah-sizing-5);
-    overflow: hidden;
-    padding-bottom: var(--mynah-sizing-1);
-}
+// Chat Form and Button Containers
+.mynah-chat-item-form-items-container,
 .mynah-chat-item-buttons-container {
-    display: flex;
-    flex-flow: row-reverse wrap;
-    gap: var(--mynah-sizing-2);
-    overflow: hidden;
-    padding-top: var(--mynah-sizing-1);
+    @include mynah-flex(column nowrap);
     padding-bottom: var(--mynah-sizing-1);
+    overflow: hidden;
+}
+
+.mynah-chat-item-buttons-container {
+    flex-flow: row-reverse wrap;
+    padding-top: var(--mynah-sizing-1);
     justify-content: flex-end;
     align-items: center;
 }

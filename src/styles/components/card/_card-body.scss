@@ -28,14 +28,12 @@
     }
 
     > p:first-child {
-        &,
-        & h1:first-child,
-        & h2:first-child,
-        & h3:first-child,
-        & h4:first-child,
-        & h5:first-child,
-        & h6:first-child {
-            margin-top: 0;
+        margin-top: 0;
+
+        @each $heading in (h1, h2, h3, h4, h5, h6) {
+            & #{$heading}:first-child {
+                margin-top: 0;
+            }
         }
     }
 
@@ -46,96 +44,49 @@
 
     &,
     & > div {
-        > p,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            word-break: normal;
-            overflow-wrap: break-word;
-            line-height: calc(var(--mynah-line-height) * 1.25);
-            margin-block-start: 0.75em;
-            margin-block-end: 0.75em;
-            padding-bottom: 1px !important;
+        @each $heading in (p, h1, h2, h3, h4, h5, h6) {
+            > #{$heading} {
+                word-break: normal;
+                overflow-wrap: break-word;
+                line-height: calc(var(--mynah-line-height) * 1.25);
+                margin-block-start: 0.75em;
+                margin-block-end: 0.75em;
+                padding-bottom: 1px !important;
 
-            &:first-child {
-                margin-block-start: 0.1em;
-            }
+                &:first-child {
+                    margin-block-start: 0.1em;
+                }
 
-            user-select: text;
+                user-select: text;
 
-            &:empty {
-                display: none;
+                &:empty {
+                    display: none;
+                }
             }
         }
 
         // FULL WIDTH ITEMS
-        table,
-        hr,
-        video,
-        audio,
-        iframe,
-        object,
-        embed,
-        blockquote {
-            max-width: 100%;
-            width: 100%;
-            box-sizing: border-box;
-            border: none;
-            font-size: inherit;
+        @each $block in (table, hr, video, audio, iframe, object, embed, blockquote) {
+            #{$block} {
+                max-width: 100%;
+                width: 100%;
+                box-sizing: border-box;
+                border: none;
+                font-size: inherit;
+            }
         }
 
         table {
             table-layout: fixed;
         }
 
-        // BLOCKS
         video {
             background-color: var(--mynah-color-bg);
         }
-        video,
-        audio,
-        iframe,
-        object,
-        embed,
-        img,
-        blockquote {
-            border-radius: var(--mynah-input-radius);
 
-            &[aspect-ratio] {
-                max-width: 100%;
-                min-width: 100%;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            &[aspect-ratio='16:9'] {
-                aspect-ratio: 16 / 9;
-            }
-            &[aspect-ratio='9:16'] {
-                aspect-ratio: 9 / 16;
-            }
-            &[aspect-ratio='21:9'] {
-                aspect-ratio: 21 / 9;
-            }
-            &[aspect-ratio='9:21'] {
-                aspect-ratio: 9 / 21;
-            }
-            &[aspect-ratio='4:3'] {
-                aspect-ratio: 4 / 3;
-            }
-            &[aspect-ratio='3:4'] {
-                aspect-ratio: 3 / 4;
-            }
-            &[aspect-ratio='3:2'] {
-                aspect-ratio: 3 / 2;
-            }
-            &[aspect-ratio='2:3'] {
-                aspect-ratio: 3 / 2;
-            }
-            &[aspect-ratio='1:1'] {
-                aspect-ratio: 1 / 1;
+        @each $aspect-ratio in ('16:9', '9:16', '21:9', '9:21', '4:3', '3:4', '3:2', '2:3', '1:1') {
+            &[aspect-ratio='#{$aspect-ratio}'] {
+                aspect-ratio: $aspect-ratio;
             }
         }
 
@@ -148,6 +99,7 @@
             background-color: var(--mynah-color-border-default);
             border: none;
         }
+
         blockquote {
             border: var(--mynah-border-width) solid var(--mynah-color-border-default);
             margin: 0;
@@ -158,9 +110,11 @@
         > blockquote > p:last-of-type {
             margin-block-end: 0;
         }
+
         > blockquote > p:first-of-type {
             margin-block-start: 0;
         }
+
         > p:last-of-type {
             margin-block-end: 0;
         }

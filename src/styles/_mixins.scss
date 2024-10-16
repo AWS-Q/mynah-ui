@@ -110,3 +110,126 @@
         @include mynah-css-var(#{$mynah}-shadow-#{$key}, $value);
     }
 }
+
+/**
+ * Generalized Flex Mixin for both column and row layouts.
+ * @param {String} $flex-flow - The flex direction and wrapping (e.g., 'row nowrap', 'column nowrap').
+ * @param {String} $align-items - The alignment of items along the cross-axis (default: 'flex-start').
+ * @param {String} $justify-content - The alignment of items along the main axis (default: 'flex-start').
+ * @param {String} $width - The width of the flex container (default: '100%').
+ */
+@mixin mynah-flex($flex-flow: row nowrap, $align-items: flex-start, $justify-content: flex-start, $width: 100%) {
+    display: flex;
+    flex-flow: $flex-flow;
+    align-items: $align-items;
+    justify-content: $justify-content;
+    gap: var(--mynah-sizing-2);
+    box-sizing: border-box;
+    overflow: hidden;
+    width: $width;
+}
+
+/**
+ * Collapsible content base wrapper.
+ * @param {String} $display - The display property for the base wrapper (default: 'block').
+ * @param {String} $position - The position of the collapsible content (default: 'relative').
+ */
+@mixin mynah-collapsible-base($display: block, $position: relative) {
+    display: $display;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    position: $position;
+}
+
+/**
+ * Box sizing mixin for border-box and overflow hidden.
+ */
+@mixin mynah-box-sizing {
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/**
+ * Placeholder mixin for form inputs.
+ */
+@mixin mynah-placeholder {
+    &::placeholder {
+        color: var(--mynah-color-text-weak);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+}
+
+/**
+ * Icon mixin for Mynah icons.
+ */
+@mixin mynah-icon {
+    font-style: normal;
+    font-weight: normal;
+    display: inline-flex;
+    width: 1em;
+    height: 1em;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-mask: center/100% no-repeat;
+    mask: center/100% no-repeat;
+    color: inherit;
+    background-color: currentColor;
+}
+
+/**
+ * Syntax token mixin for syntax highlighting.
+ * @param {String} $bg-color - The background color of the token.
+ * @param {String} $display - The display property of the token (default: 'block').
+ */
+@mixin mynah-syntax-token($bg-color, $display: block) {
+    background-color: $bg-color;
+    color: inherit;
+    display: $display;
+}
+
+/**
+ * Overlay background mixin for overlay elements.
+ * @param {String} $color - The color of the overlay.
+ * @param {Number} $opacity - The opacity of the overlay.
+ */
+@mixin mynah-overlay-bg($color, $opacity) {
+    background-color: $color;
+    opacity: $opacity;
+    pointer-events: none;
+    user-select: none;
+}
+
+/**
+ * Card padding mixin for padding sizes.
+ * @param {String} $size - The size of the padding.
+ * @param {String} $padding - The padding value.
+ */
+@mixin mynah-card-padding($size, $padding) {
+    padding: var(--mynah-sizing-#{$padding});
+    @if $size == 'none' {
+        border-radius: 0;
+        gap: var(--mynah-sizing-1);
+    }
+}
+
+/**
+ * @param {String} $position - The position of the element.
+ * @param {Number} $top - The top position of the element.
+ * @param {Number} $left - The left position of the element.
+ * @param {Number} $right - The right position of the element.
+ * @param {Number} $bottom - The bottom position of the element.
+ * @param {String} $width - The width of the element.
+ * @param {String} $height - The height of the element.
+ */
+@mixin mynah-position($position, $top: 0, $left: 0, $right: 0, $bottom: 0, $width: 100%, $height: 100%) {
+    position: $position;
+    top: $top;
+    left: $left;
+    right: $right;
+    bottom: $bottom;
+    width: $width;
+    height: $height;
+}

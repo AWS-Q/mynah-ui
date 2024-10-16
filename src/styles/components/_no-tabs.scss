@@ -1,16 +1,18 @@
+@import '../mixins';
+
 .mynah-no-tabs-wrapper {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
+    @include mynah-flex(column nowrap, center, center, 100%);
     gap: var(--mynah-sizing-6);
     flex: 1;
+
     &.hidden {
         display: none;
     }
+
     &:not(.hidden) + .mynah-ui-tab-contents-wrapper {
         display: none;
     }
+
     > .mynah-no-tabs-icon-wrapper {
         > .mynah-ui-icon {
             font-size: calc(2 * var(--mynah-sizing-18));
@@ -18,6 +20,7 @@
             opacity: 0.15;
         }
     }
+
     > .mynah-no-tabs-info {
         > * {
             margin: 1rem;
@@ -27,6 +30,7 @@
         opacity: 0.75;
         text-align: center;
     }
+
     > .mynah-no-tabs-buttons-wrapper {
         > .mynah-button {
             padding: var(--mynah-sizing-2) var(--mynah-sizing-3);

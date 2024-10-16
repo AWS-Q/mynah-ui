@@ -1,16 +1,8 @@
+@import '../mixins';
 .mynah-ui-icon {
-    font-style: normal;
-    font-weight: normal;
-    display: inline-flex;
-    width: 1em;
-    height: 1em;
-    font-variant: normal;
-    text-transform: none;
-    -webkit-mask: center/100% no-repeat;
-    mask: center/100% no-repeat;
-    color: inherit;
-    background-color: currentColor;
+    @include mynah-icon;
 
+    // Hide nested span elements
     > span {
         display: none;
     }

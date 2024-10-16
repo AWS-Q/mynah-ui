@@ -1,9 +1,6 @@
+@import '../mixins';
 .mynah-overlay {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    @include mynah-position(fixed);
     overflow: hidden;
     box-sizing: border-box;
     pointer-events: none;
@@ -17,7 +14,7 @@
             width: 100%;
             height: 100%;
             background-color: var(--mynah-color-bg);
-            transition: var(--mynah-short-rev-opacity-transition);
+            transition: var(--mynah-short-transition-rev-opacity);
             opacity: 0.45;
         }
     }
@@ -26,7 +23,7 @@
         --overlayTopPos: 0;
         --overlayInnerHorizontalOrigin: left;
         --overlayInnerVerticalOrigin: top;
-        position: absolute;
+        @include mynah-position(absolute);
         display: block;
         overflow: hidden;
         border-radius: var(--mynah-card-radius);
@@ -50,14 +47,8 @@
             &:before {
                 content: '';
                 background-color: transparent;
-                transition: var(--mynah-short-rev-transition);
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                width: auto;
-                height: auto;
+                transition: var(--mynah-short-transition-rev);
+                @include mynah-position(absolute);
                 pointer-events: none;
                 box-sizing: border-box;
                 opacity: 0;
@@ -70,16 +61,12 @@
 
             &:after {
                 content: '';
-                position: absolute;
-                width: var(--mynah-sizing-8);
-                height: var(--mynah-sizing-8);
-                left: 0;
-                top: 0;
+                @include mynah-position(absolute, 0, 0, 0, 0, var(--mynah-sizing-8), var(--mynah-sizing-8));
                 opacity: 0;
                 border: var(--mynah-sizing-4);
                 background-color: var(--mynah-card-bg);
                 border-radius: inherit;
-                transition: var(--mynah-short-rev-transition);
+                transition: var(--mynah-short-transition-rev);
                 transition-delay: 20ms;
             }
         }
@@ -129,12 +116,12 @@
             position: relative;
             transform: translate3d(0, 0, 0) scale(0.85);
             transform-origin: var(--overlayInnerHorizontalOrigin) var(--overlayInnerVerticalOrigin);
-            transition: var(--mynah-short-rev-transition);
+            transition: var(--mynah-short-transition-rev);
             width: 100%;
         }
         &:before {
             transform: translate3d(0, 0, 0) scale(0.85);
-            transition: var(--mynah-short-rev-transition);
+            transition: var(--mynah-short-transition-rev);
         }
         > .mynah-overlay-inner-container,
         &:before {

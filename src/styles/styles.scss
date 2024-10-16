@@ -13,3 +13,10 @@ $mynah: '--mynah';
 @import 'favicons';
 @import 'scrollbars';
 @import './components/main-container';
+
+/**
+ * smooth scroll behavior
+ */
+html {
+    scroll-behavior: smooth;
+}
